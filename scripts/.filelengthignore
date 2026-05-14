@@ -1,0 +1,22 @@
+# Dependências e travas
+
+Cargo.lock
+\*.tsbuildinfo
+
+# Documentação
+
+README.md
+AGENTS.md
+docs/
+
+# Infra e Configs
+
+.gitattributes
+.editorconfig
+
+# Scripts
+
+tests/
+scripts/check-cycles.mjs
+
+# muito documentados. **corrigir o script para não considerar comentários**
