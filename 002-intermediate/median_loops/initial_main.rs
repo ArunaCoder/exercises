@@ -4,8 +4,6 @@
 // 2. The Mode: The value that appears most frequently using a HashMap.
 // Use this Vec: [42, 1, 3, 42, 10]
 
-use std::collections::HashMap;
-
 fn main() {
     let numbers = vec![42, 1, 3, 42, 10];
 
@@ -26,12 +24,12 @@ fn main() {
 /// Returns None if the list is empty
 pub fn find_median(numbers: &[i32]) -> Option<f64> {
     // Your implementation here
-    None
+    todo!()
 }
 
 /// Find the mode (most frequent value) using a HashMap
 /// Returns None if the list is empty
 pub fn find_mode(numbers: &[i32]) -> Option<i32> {
     // Your implementation here
-    None
+    todo!()
 }

@@ -1,5 +1,5 @@
 [package]
-name = "binary_to_decimal_converter"
+name = "largest_series_product"
 version = "0.1.0"
 edition = "2024"
 

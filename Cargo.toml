@@ -1,3 +1,9 @@
 [workspace]
 resolver = "3"
-members = ["exercises/*"]
+members = [
+  # Track-based structure
+  "001-basic/*",
+  "002-intermediate/*",
+  "003-advanced/*",
+  "projects/*",
+]
