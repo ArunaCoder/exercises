@@ -37,55 +37,41 @@ You've earned your syntactic sugar. Now you'll:
 
 ## Exercise List
 
+**Currently Available: 0 exercises** (coming soon!)
+
+Run with: `cargo run -p <folder_name>`
+
 ### Functional Rewrites (Compare with Track 002!)
 
-| #   | Exercise                       | Compare With |
-| --- | ------------------------------ | ------------ |
-| 067 | Median (Functional)            | 042 (loops)  |
-| 068 | Mode (Functional)              | 043 (loops)  |
-| 069 | Company (Functional)           | 045 (loops)  |
-| 070 | Word Frequency (Functional)    | 047 (loops)  |
-| 071 | Array Statistics (Functional)  | 046 (loops)  |
-| 072 | Anagram (Functional)           | 049 (loops)  |
-| 073 | Duplicate Remover (Functional) | 048 (loops)  |
+These exercises solve the **exact same problems** as Track 002, but using functional programming patterns. Open both versions side-by-side to see what abstractions hide!
 
-### Advanced Exercises
+| #   | Exercise                       | Folder                      | Compare With                                                    | Key Abstraction               |
+| --- | ------------------------------ | --------------------------- | --------------------------------------------------------------- | ----------------------------- |
+| 1   | Median (Functional)            | median_functional           | [median_loops](../002-intermediate/median_loops/)               | `.get()`, slice patterns      |
+| 2   | Mode (Functional)              | mode_functional             | [median_loops](../002-intermediate/median_loops/)               | `.max_by_key()`               |
+| 3   | Company (Functional)           | company_functional          | [company_departments](../002-intermediate/company_departments/) | `.entry()` API, `.collect()`  |
+| 4   | Array Statistics (Functional)  | array_stats_functional      | [array_statistics](../002-intermediate/array_statistics/)       | `.fold()`, `.map()`           |
+| 5   | Duplicate Remover (Functional) | duplicate_remove_functional | [duplicate_remover](../002-intermediate/duplicate_remover/)     | `.collect::<HashSet>()`       |
+| 6   | Anagram (Functional)           | anagram_functional          | [anagram_checker](../002-intermediate/anagram_checker/)         | `.chars().sorted().collect()` |
 
-| #   | Exercise                       | Key Concepts             |
-| --- | ------------------------------ | ------------------------ |
-| 074 | Tournament Results             | Custom comparators       |
-| 075 | Beer Song Generator            | Range iteration          |
-| 076 | Food Chain Song                | Iterator accumulation    |
-| 077 | Bottle Song                    | Range with pluralization |
-| 078 | Kindergarten Garden            | HashMap parsing          |
-| 079 | Poker Hand Evaluator           | Ord trait, complex logic |
-| 080 | Twelve Days Song               | Range accumulation       |
-| 081 | Word Search Puzzle             | 2D iteration patterns    |
-| 082 | Change Calculator              | Dynamic programming      |
-| 083 | Knapsack Problem               | DP optimization          |
-| 084 | Pythagorean Triplet            | Iterator combinations    |
-| 085 | Largest Palindrome Product     | Product finding          |
-| 086 | Simple Substitution Cipher     | HashMap mapping          |
-| 087 | Gigasecond Calculator          | Date/time operations     |
-| 088 | Reverse String (Recursive)     | Recursion basics         |
-| 089 | Factorial (Recursive)          | Memoization              |
-| 090 | Binary Search                  | Classic algorithm        |
-| 091 | Simple Grep                    | String filtering         |
-| 092 | Word Wrap                      | Text accumulation        |
-| 093 | Minesweeper Board              | Neighbor counting        |
-| 094 | Connect Game Winner            | Graph traversal DFS/BFS  |
-| 095 | Dominoes Chain                 | Backtracking             |
-| 096 | Simple State Machine           | Advanced enums           |
-| 097 | Rotational Cipher (Generic)    | Generic ROT-N            |
-| 098 | Two Bucket Problem             | BFS state exploration    |
-| 099 | Yacht Scoring                  | Complex pattern matching |
-| 100 | Linked List Length (Recursive) | Recursive traversal      |
-| 101 | Flatten Nested Array           | Recursive enum           |
-| 102 | Sublist Checker                | `.windows()` iterator    |
-| 103 | All Your Base                  | Base conversion          |
-| 104 | Custom Set (Generic)           | Generic implementation   |
-| 105 | Circular Buffer (Generic)      | Generic data structure   |
-| 106 | Simple Linked List (Generic)   | Box, Option, generics    |
+### Advanced Exercises (New Concepts)
+
+These exercises introduce concepts not covered in previous tracks: recursion, graph algorithms, dynamic programming, and advanced trait usage.
+
+| #   | Exercise                   | Folder              | Key Concepts                     |
+| --- | -------------------------- | ------------------- | -------------------------------- |
+| 7   | Tournament Results         | tournament_results  | Custom comparators, sorting      |
+| 8   | Beer Song Generator        | beer_song           | Range iteration, string building |
+| 9   | Reverse String (Recursive) | reverse_recursive   | Recursion basics, base cases     |
+| 10  | Factorial (Recursive)      | factorial_recursive | Memoization, recursion           |
+| 11  | Binary Search              | binary_search       | Classic algorithm, O(log n)      |
+| 12  | Simple Grep                | simple_grep         | String filtering, iterators      |
+| 13  | Pythagorean Triplet        | pythagorean_triplet | Iterator combinations            |
+| 14  | Two Bucket Problem         | two_bucket          | BFS, state exploration           |
+
+### More Coming Soon
+
+Additional exercises will cover: dynamic programming, graph traversal, custom data structures with generics, trait implementations, and more!
 
 ## Estimated Time
 
@@ -110,10 +96,10 @@ After this track, you'll understand:
 
 ## Compare Your Solutions
 
-For exercises 067-073, **open your Track 002 solution side-by-side**:
+For the functional rewrites, **open your Track 002 solution side-by-side**:
 
 ```rust
-// Track 002 (loops) - Exercise 043
+// Track 002 (loops) - median_loops
 let mut max_count = 0;
 let mut mode = None;
 for (num, count) in &counts {
@@ -123,13 +109,15 @@ for (num, count) in &counts {
     }
 }
 
-// Track 003 (functional) - Exercise 068
+// Track 003 (functional) - mode_functional
 let mode = counts.iter()
     .max_by_key(|(_, count)| *count)
     .map(|(num, _)| *num);
 ```
 
 **Ask yourself:** What is `.max_by_key()` hiding? (Answer: Your for loop!)
+
+This is why you learned loops first. Now you appreciate the abstraction.
 
 ## Next Steps
 

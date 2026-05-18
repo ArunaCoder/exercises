@@ -36,41 +36,44 @@ You've mastered the basics. Now you'll:
 
 ## Exercise List
 
-| #   | Exercise                | Key Concepts               |
-| --- | ----------------------- | -------------------------- |
-| 034 | Grade Calculator        | Struct with methods        |
-| 035 | Simple Inventory System | CRUD operations, structs   |
-| 036 | Clock Implementation    | Modulo arithmetic, Display |
-| 037 | Queen Attack            | Coordinate logic           |
-| 038 | Phone Number Formatter  | String validation          |
-| 039 | Roman Numeral Converter | Bidirectional conversion   |
-| 040 | Unit Converter          | Enum pattern matching      |
-| 041 | Space Age Calculator    | Astronomical calculations  |
-| 042 | Median (Loops)          | Vec sorting with loops     |
-| 043 | Mode (Loops)            | HashMap max finding        |
-| 044 | Pig Latin               | String manipulation        |
-| 045 | Company Departments     | HashMap<String, Vec>       |
-| 046 | Array Statistics        | Multiple calculations      |
-| 047 | Word Frequency          | HashMap word counting      |
-| 048 | Duplicate Remover       | HashSet + Vec              |
-| 049 | Anagram Checker         | Sort + compare             |
-| 050 | Hamming Distance        | Dual iteration, errors     |
-| 051 | Matching Brackets       | Vec as stack               |
-| 052 | Secret Handshake        | Binary operations          |
-| 053 | Allergies               | Binary flags               |
-| 054 | Sieve of Eratosthenes   | Prime algorithm            |
-| 055 | Bob Chatbot             | Text pattern analysis      |
-| 056 | Protein Translation     | Codon mapping              |
-| 057 | Saddle Points           | Matrix operations          |
-| 058 | ETL Transform           | HashMap transformation     |
-| 059 | Grains on Chessboard    | Exponentiation, overflow   |
-| 060 | Largest Series Product  | Window-like logic          |
-| 061 | Rail Fence Cipher       | 2D vectors, encryption     |
-| 062 | Diffie-Hellman          | Modular arithmetic         |
-| 063 | Dot Product             | Manual zip iteration       |
-| 064 | Matrix Operations       | Nested loops, math         |
-| 065 | Spiral Matrix           | 2D generation              |
-| 066 | Pascal's Triangle       | Nested Vec generation      |
+**Currently Available: 10 exercises**
+
+Run with: `cargo run -p <folder_name>`
+
+| #   | Exercise                | Folder                                              | Key Concepts                          |
+| --- | ----------------------- | --------------------------------------------------- | ------------------------------------- |
+| 1   | Grade Calculator        | [grade_calculator](grade_calculator/)               | Struct with methods, weighted average |
+| 2   | Simple Inventory System | [simple_inventory_system](simple_inventory_system/) | CRUD operations, structs              |
+| 3   | Unit Converter          | [unit_converter](unit_converter/)                   | Enum pattern matching, conversions    |
+| 4   | Median & Mode (Loops)   | [median_loops](median_loops/)                       | Vec sorting, HashMap, manual loops    |
+| 5   | Pig Latin               | [pig_latin](pig_latin/)                             | String manipulation, UTF-8            |
+| 6   | Company Departments     | [company_departments](company_departments/)         | HashMap<String, Vec>, sorting         |
+| 7   | Array Statistics        | [array_statistics](array_statistics/)               | Multiple statistical calculations     |
+| 8   | Duplicate Remover       | [duplicate_remover](duplicate_remover/)             | HashSet + Vec, order preservation     |
+| 9   | Anagram Checker         | [anagram_checker](anagram_checker/)                 | Sort + compare, manual approach       |
+| 10  | Largest Series Product  | [largest_series_product](largest_series_product/)   | Window-like logic with loops          |
+
+### Compare with Track 003 Later
+
+These exercises will have **functional versions** in Track 003:
+
+- **Median & Mode** → See `.max_by_key()` replace your for loop
+- **Company Departments** → Learn the entry API + `.collect()`
+- **Array Statistics** → Discover `.fold()` and `.map()`
+- **Duplicate Remover** → Use functional deduplication methods
+- **Anagram Checker** → Chain `.chars().collect()` functionally
+
+You'll appreciate the abstractions because you'll know what they're hiding!
+
+### Coming Soon
+
+More exercises will be added following the [TAXONOMY.md](../TAXONOMY.md) plan, including:
+
+- Clock Implementation (modulo arithmetic, Display trait)
+- Roman Numeral Converter (bidirectional conversion)
+- Hamming Distance (dual iteration, error handling)
+- Matching Brackets (Vec as stack)
+- And many more!
 
 ## Estimated Time
 

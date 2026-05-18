@@ -16,7 +16,13 @@ These projects combine:
 
 ## Project List
 
-### 001: CLI Todo List Manager
+**Currently Available: 0 projects** (coming soon!)
+
+Run with: `cargo run -p <folder_name>`
+
+### CLI Todo List Manager
+
+**Folder:** `todo_list_cli`
 
 Build a command-line todo list application with persistence.
 
@@ -33,7 +39,9 @@ Build a command-line todo list application with persistence.
 
 ---
 
-### 002: Text Adventure Game
+### Text Adventure Game
+
+**Folder:** `text_adventure_game`
 
 Create an interactive text-based adventure game.
 
@@ -51,7 +59,9 @@ Create an interactive text-based adventure game.
 
 ---
 
-### 003: HTTP Log Analyzer
+### HTTP Log Analyzer
+
+**Folder:** `http_log_analyzer`
 
 Parse and analyze web server logs.
 
@@ -68,7 +78,9 @@ Parse and analyze web server logs.
 
 ---
 
-### 004: Simple Web Scraper
+### Simple Web Scraper
+
+**Folder:** `web_scraper`
 
 Fetch and extract data from web pages.
 
@@ -85,7 +97,9 @@ Fetch and extract data from web pages.
 
 ---
 
-### 005: Markdown to HTML Converter
+### Markdown to HTML Converter
+
+**Folder:** `markdown_converter`
 
 Convert Markdown syntax to HTML.
 

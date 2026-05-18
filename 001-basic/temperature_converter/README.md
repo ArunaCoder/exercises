@@ -1,7 +1,5 @@
 # Temperature Converter
 
-Source: Exercise 04 from Rust Basic Exercises
-
 ### Objective
 
 Create a command-line program that converts temperatures between Fahrenheit and Celsius. Accept user input specifying the temperature value and the direction of conversion (F to C or C to F). Use functions for each conversion formula and display the result with appropriate formatting.
