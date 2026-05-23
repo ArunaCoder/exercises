@@ -9,6 +9,10 @@
 fn main() {
     println!("FizzBuzz from 1 to 100:");
     fizzbuzz(100);
+
+    let result = fizzbuzz_vec(100);
+
+    println!("{result:?}")
 }
 
 /// FizzBuzz from 1 to n

@@ -12,11 +12,19 @@ fn main() {
 
     for year in test_years {
         let is_leap = is_leap_year(year);
-        println!("{}: {}", year, if is_leap { "Leap Year ✓" } else { "Not Leap Year ✗" });
+        println!(
+            "{}: {}",
+            year,
+            if is_leap {
+                "Leap Year ✓"
+            } else {
+                "Not Leap Year ✗"
+            }
+        );
     }
 }
 
 /// Check if a year is a leap year
 pub fn is_leap_year(year: u32) -> bool {
-    todo!("Implement leap year logic using the Gregorian calendar rules")
+    (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)
 }

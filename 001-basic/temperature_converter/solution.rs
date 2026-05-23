@@ -1,10 +1,61 @@
-// TEMPERATURE CONVERTER
+// First solution. Not optimized.
 
+use std::io;
 fn main() {
-    // The candidate should write the code here or call the function below.
+    // Your code here: prompt user for temperature and conversion direction
+    println!("Temperature Converter");
+    println!("Choose 1 -  Fahrenheit to Celsius");
+    println!("Choose 2 - Celsius to Fahrenheit");
+
+    let mut input = String::new();
+
+    io::stdin()
+        .read_line(&mut input)
+        .expect("Failed to read line");
+
+    let input: u32 = input.trim().parse().expect("Please type a number!");
+
+    if input == 1 {
+        println!("Enter the Fahrenheit degree to be converted");
+        let mut input = String::new();
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read line");
+
+        let input: u32 = input.trim().parse().expect("Please type a number!");
+
+        print!(
+            "{input} Fahrenheit equals to {} Celsius",
+            fahrenheit_to_celsius(input as f64)
+        )
+    } else if input == 2 {
+        println!("Enter the Celcius degree to be converted");
+        let mut input = String::new();
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read line");
+
+        let input: u32 = input.trim().parse().expect("Please type a number!");
+
+        print!(
+            "{input} Celsius equals to {} Fahrenheit",
+            celsius_to_fahrenheit(input as f64)
+        )
+    } else {
+        println!("You typed {input}, which is different from 1 or 2. Let's start again.");
+    }
 }
 
-/// Your implementation:
-pub fn solve() {
-    // Write your logic here.
+/// Convert Fahrenheit to Celsius
+pub fn fahrenheit_to_celsius(f: f64) -> f64 {
+    // Implement: (F - 32) * 5/9
+    let c = (f - 32.0) * 5.0 / 9.0;
+    c
+}
+
+/// Convert Celsius to Fahrenheit
+pub fn celsius_to_fahrenheit(c: f64) -> f64 {
+    // Implement: (C * 9/5) + 32
+    let f = c * 9.0 / 5.0 + 32.0;
+    f
 }
