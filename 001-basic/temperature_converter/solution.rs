@@ -46,16 +46,42 @@ fn main() {
     }
 }
 
+// ============================================================
+// VERSÕES DE CONVERSÃO DE TEMPERATURA
+// ============================================================
+
+// 1º Lugar: Expressão Direta (Minimalista e Idiomática)
+// Quando usar: Código simples, conversões ocasionais. Vantagens: Concisa, clara, idiomática Rust. A expressão final é retornada implicitamente. Sem variáveis intermediárias desnecessárias. Perfeita para a maioria dos casos.
 /// Convert Fahrenheit to Celsius
 pub fn fahrenheit_to_celsius(f: f64) -> f64 {
-    // Implement: (F - 32) * 5/9
-    let c = (f - 32.0) * 5.0 / 9.0;
-    c
+    (f - 32.0) * 5.0 / 9.0
 }
 
 /// Convert Celsius to Fahrenheit
 pub fn celsius_to_fahrenheit(c: f64) -> f64 {
-    // Implement: (C * 9/5) + 32
-    let f = c * 9.0 / 5.0 + 32.0;
-    f
+    c * 9.0 / 5.0 + 32.0
+}
+
+// 2º Lugar: Com Constantes (Otimização para Hot Loops)
+// Quando usar: Milhões de conversões em loop. Vantagens: Ratios pré-calculados (5.0/9.0 e 9.0/5.0 computados em compile-time). Evita divisões repetidas. Nomes descritivos melhoram legibilidade. Só vale a pena se performance for crítica.
+const FAHRENHEIT_OFFSET: f64 = 32.0;
+const F_TO_C_RATIO: f64 = 5.0 / 9.0;
+const C_TO_F_RATIO: f64 = 9.0 / 5.0;
+
+pub fn fahrenheit_to_celsius_opt(f: f64) -> f64 {
+    (f - FAHRENHEIT_OFFSET) * F_TO_C_RATIO
+}
+
+pub fn celsius_to_fahrenheit_opt(c: f64) -> f64 {
+    c * C_TO_F_RATIO + FAHRENHEIT_OFFSET
+}
+
+// 3º Lugar: Usando 1.8 (Direto e Matemático)
+// Quando usar: Preferência por divisão vs multiplicação, ou quando 1.8 é mais familiar (9/5 = 1.8). Vantagens: Divisão é mais intuitiva que multiplicação para alguns. Ligeiramente mais eficiente (1 operação a menos). Desvantagens: Menos explícito que a fração 9/5.
+pub fn fahrenheit_to_celsius_alt(f: f64) -> f64 {
+    (f - 32.0) / 1.8
+}
+
+pub fn celsius_to_fahrenheit_alt(c: f64) -> f64 {
+    c * 1.8 + 32.0
 }

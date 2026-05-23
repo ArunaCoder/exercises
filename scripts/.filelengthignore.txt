@@ -10,6 +10,7 @@ AGENTS.md
 docs/
 EXERCISES_LIST.md
 **/solution.rs
+The Rust Edition Guide - Rust 2024.md
 
 # Infra e Configs
 

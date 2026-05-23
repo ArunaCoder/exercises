@@ -2,11 +2,10 @@
 // This program converts temperatures between Fahrenheit and Celsius.
 // - Fahrenheit to Celsius: (F - 32) * 5/9
 // - Celsius to Fahrenheit: (C * 9/5) + 32
-// Implement two functions for each conversion direction.
+// Implement one function for each conversion direction.
 
 use std::io;
 fn main() {
-    // Your code here: prompt user for temperature and conversion direction
     println!("Temperature Converter");
     println!("Choose 1 -  Fahrenheit to Celsius");
     println!("Choose 2 - Celsius to Fahrenheit");
@@ -29,7 +28,7 @@ fn main() {
         let input: u32 = input.trim().parse().expect("Please type a number!");
 
         print!(
-            "{input} Fahrenheit equals to {} Celsius",
+            "{input} Fahrenheit equals to {:.2} Celsius",
             fahrenheit_to_celsius(input as f64)
         )
     } else if input == 2 {
@@ -42,7 +41,7 @@ fn main() {
         let input: u32 = input.trim().parse().expect("Please type a number!");
 
         print!(
-            "{input} Celsius equals to {} Fahrenheit",
+            "{input} Celsius equals to {:.2} Fahrenheit",
             celsius_to_fahrenheit(input as f64)
         )
     } else {
@@ -50,16 +49,10 @@ fn main() {
     }
 }
 
-/// Convert Fahrenheit to Celsius
 pub fn fahrenheit_to_celsius(f: f64) -> f64 {
-    // Implement: (F - 32) * 5/9
-    let c = (f - 32.0) * 5.0 / 9.0;
-    c
+    ((f - 32.0) * 5.0 / 9.0 * 100.0).round() / 100.0
 }
 
-/// Convert Celsius to Fahrenheit
 pub fn celsius_to_fahrenheit(c: f64) -> f64 {
-    // Implement: (C * 9/5) + 32
-    let f = c * 9.0 / 5.0 + 32.0;
-    f
+    ((c * 9.0 / 5.0 + 32.0) * 100.0).round() / 100.0
 }
