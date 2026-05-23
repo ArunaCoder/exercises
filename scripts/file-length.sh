@@ -24,7 +24,7 @@ MAX_DEFAULT=300    # Qualquer outro tipo
 # ----------------------------------------------------------
 
 # Caminho absoluto para o arquivo de ignore (na mesma pasta do script)
-IGNORE_FILE="$(dirname "$0")/.filelengthignore"
+IGNORE_FILE="$(dirname "$0")/.filelengthignore.txt"
 
 # ---------- FUNÇÕES AUXILIARES ----------------------------
 should_ignore() {

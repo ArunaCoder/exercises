@@ -17,55 +17,39 @@ fn main() {
 
 /// FizzBuzz from 1 to n
 pub fn fizzbuzz(n: u32) {
+    use std::io::{self, Write};
+
+    let stdout = io::stdout();
+    let mut handle = io::BufWriter::new(stdout.lock());
+
     for count in 1..=n {
         match (count % 3 == 0, count % 5 == 0) {
-            (true, true) => println!("FizzBuzz"),
-            (true, false) => println!("Fizz"),
-            (false, true) => println!("Buzz"),
-            _ => println!("{count}"),
+            (true, true) => {
+                let _ = writeln!(handle, "FizzBuzz");
+            }
+            (true, false) => {
+                let _ = writeln!(handle, "Fizz");
+            }
+            (false, true) => {
+                let _ = writeln!(handle, "Buzz");
+            }
+            _ => {
+                let _ = writeln!(handle, "{count}");
+            }
         }
     }
 }
 /// Alternative: return Vec<String> instead of printing
 pub fn fizzbuzz_vec(n: u32) -> Vec<String> {
-    let mut v = Vec::with_capacity(n as usize);
-    let mut count = 1;
-
-    // Loop desenrolado para blocos de 15
-    while count + 14 <= n {
-        v.push(count.to_string());
-        v.push((count + 1).to_string());
-        v.push(String::from("Fizz"));
-        v.push((count + 3).to_string());
-        v.push(String::from("Buzz"));
-        v.push(String::from("Fizz"));
-        v.push((count + 6).to_string());
-        v.push((count + 7).to_string());
-        v.push(String::from("Fizz"));
-        v.push(String::from("Buzz"));
-        v.push((count + 10).to_string());
-        v.push(String::from("Fizz"));
-        v.push((count + 12).to_string());
-        v.push((count + 13).to_string());
-        v.push(String::from("FizzBuzz"));
-        count += 15
-    }
-
-    // Processa elementos restantes (remainder)
-    while count <= n {
-        let res = match (count % 3 == 0, count % 5 == 0) {
+    (1..=n)
+        .map(|count| match (count % 3 == 0, count % 5 == 0) {
             (true, true) => String::from("FizzBuzz"),
             (true, false) => String::from("Fizz"),
             (false, true) => String::from("Buzz"),
             _ => count.to_string(),
-        };
-        v.push(res);
-        count += 1;
-    }
-
-    v
+        })
+        .collect()
 }
-
 #[cfg(test)]
 mod tests {
     use super::*;

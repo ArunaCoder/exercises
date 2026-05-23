@@ -1,7 +1,7 @@
 # Dependências e travas
 
 Cargo.lock
-\*.tsbuildinfo
+*.tsbuildinfo
 
 # Documentação
 
@@ -9,6 +9,7 @@ README.md
 AGENTS.md
 docs/
 EXERCISES_LIST.md
+**/solution.rs
 
 # Infra e Configs
 
