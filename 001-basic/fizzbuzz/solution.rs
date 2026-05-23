@@ -1,7 +1,45 @@
 // Parte 1: Versão de Impressão (fizzbuzz)
+// Nota: Para esta função, não focamos em performance. O println! domina o tempo de execução,
+// tornando as diferenças algorítmicas negligíveis. A análise de performance está em fizzbuzz_vec.
 
-// 1º Lugar: Casamento de Padrões Eficiente (O Idioma Rust)
-// Por que é a melhor? É limpa, declarativa e não força cálculos desnecessários na CPU. O uso do operador de resto (%) de forma combinada tira proveito do curto-circuito lógico antes de entrar no match. O compilador consegue otimizar os desvios e você mantém a legibilidade sem comprometer o silício.
+// MENÇÃO ESPECIAL: BufWriter para I/O Pesado (Otimização Real)
+// === PERFORMANCE FIZZBUZZ ===
+// FizzBuzz (print) - n = 100000:
+// • Tempo: 265.5341ms <--- milissegundos
+// ===================
+
+// Quando usar: Volume massivo de impressões (milhares/milhões de linhas). Reduz syscalls agrupando writes em buffer. O .lock() evita travar/destravar stdout repetidamente. Esta é uma otimização de sistema apropriada, diferente das micro-otimizações algorítmicas. Em FizzBuzz com n pequeno, a diferença é imperceptível. Com n=1_000_000+, pode ser 10-50x mais rápido que println!.
+pub fn fizzbuzz(n: u32) {
+    use std::io::{self, Write};
+
+    let stdout = io::stdout();
+    let mut handle = io::BufWriter::new(stdout.lock());
+
+    for count in 1..=n {
+        match (count % 3 == 0, count % 5 == 0) {
+            (true, true) => {
+                let _ = writeln!(handle, "FizzBuzz");
+            }
+            (true, false) => {
+                let _ = writeln!(handle, "Fizz");
+            }
+            (false, true) => {
+                let _ = writeln!(handle, "Buzz");
+            }
+            _ => {
+                let _ = writeln!(handle, "{count}");
+            }
+        }
+    }
+}
+
+// 1º Lugar: Casamento de Padrões (Idiomático Rust)
+// === PERFORMANCE FIZZBUZZ ===
+// FizzBuzz (print) - n = 100000:
+// • Tempo: 5.5292047s <--- segundos
+// ===================
+
+// Vantagens: Pattern matching explícito e declarativo. Expressa claramente a lógica do problema. Idiomático em Rust. O compilador otimiza para código assembly eficiente. Performance idêntica ao if/else, mas mais elegante.
 pub fn fizzbuzz(n: u32) {
     for count in 1..=n {
         match (count % 3 == 0, count % 5 == 0) {
@@ -13,8 +51,8 @@ pub fn fizzbuzz(n: u32) {
     }
 }
 
-// 2º Lugar: O Clássico Imperativo Otimizado (Controle de Fluxo Direto)
-// Por que está aqui? Substitui o loop while manual por um iterador nativo (1..=n), o que elimina o risco de erros de contagem e permite ao compilador aplicar otimizações de desbobinamento de loop (loop unrolling). A cadeia de if/else funciona, mas checar % 15 primeiro é uma heurística que assume que a CPU lidará bem com o desvio mais raro falhando a maior parte do tempo.
+// 2º Lugar: If/Else Clássico (Familiar e Direto)
+// Vantagens: Familiar para quem vem de outras linguagens. Código imperativo direto. Checar % 15 primeiro evita duas checagens subsequentes (micro-otimização irrelevante aqui). Performance praticamente idêntica ao match. Escolha por preferência pessoal.
 pub fn fizzbuzz(n: u32) {
     for count in 1..=n {
         if count % 15 == 0 {
@@ -29,8 +67,8 @@ pub fn fizzbuzz(n: u32) {
     }
 }
 
-// 3º Lugar: Concatenação de Strings em Loop (Inchaço Oculto e Alocação)
-// Por que é a pior? Alocar memória na heap para fazer um println! é um crime de engenharia. Criar uma string vazia e empurrar caracteres nela a cada iteração força o alocador do sistema a trabalhar sem necessidade, destruindo a localidade de cache da CPU para um problema puramente aritmético.
+// 3º Lugar: Concatenação de Strings (Alocação Desnecessária)
+// Desvantagens: Aloca String na heap apenas para imprimir e descartar. Força o alocador a trabalhar sem necessidade. Ainda assim, a diferença de performance é pequena porque println! é a operação mais lenta. Evite por princípio, não por performance.
 pub fn fizzbuzz(n: u32) {
     for count in 1..=n {
         let mut out = String::new();
@@ -49,17 +87,121 @@ pub fn fizzbuzz(n: u32) {
 }
 
 // Parte 2: Versão com Vetor (fizzbuzz_vec)
-// Aqui o buraco é mais embaixo. Funções que retornam coleções sofrem com realocação de memória. Se você não avisa a CPU o tamanho do vetor, ela precisa adivinhar, realocar e copiar dados na heap toda vez que o espaço acaba.
+// Comparando implementações: performance similar, mas diferenças críticas em idiomaticidade, manutenibilidade e corretude.
 
+// 1º Lugar: Funcional Pura (Abstração Zero-Cost)
 // === PERFORMANCE (100 iterações) ===
 // FizzBuzz (vetor):
-// • Média: 29.829953ms
-// • Mínimo: 26.811ms
-// • Máximo: 48.3168ms
+// • Média: 33.014854ms
+// • Mínimo: 30.895ms
+// • Máximo: 40.5282ms
 // ===================
+
+// === PERFORMANCE (100 iterações) === RELEASE MODE
+// FizzBuzz (vetor):
+// • Média: 14.591528ms
+// • Mínimo: 12.8187ms
+// • Máximo: 17.4809ms
+// ===================
+
+// Vantagens: Código idiomático Rust, sem estado mutável, menor variação de performance. O .collect() pré-aloca via TrustedLen. Fácil de compor e paralelizar. Melhor equilíbrio entre legibilidade e performance para código de produção.
+pub fn fizzbuzz_vec(n: u32) -> Vec<String> {
+    (1..=n)
+        .map(|count| match (count % 3 == 0, count % 5 == 0) {
+            (true, true) => String::from("FizzBuzz"),
+            (true, false) => String::from("Fizz"),
+            (false, true) => String::from("Buzz"),
+            _ => count.to_string(),
+        })
+        .collect()
+}
+
+// 2º Lugar: For Loop com Vec::with_capacity
+// === PERFORMANCE (100 iterações) ===
+// FizzBuzz (vetor):
+// • Média: 33.446561ms
+// • Mínimo: 30.8137ms
+// • Máximo: 58.0763ms
+// ===================
+
+// === PERFORMANCE (100 iterações) === RELEASE MODE
+// FizzBuzz (vetor):
+// • Média: 13.561708ms
+// • Mínimo: 12.3693ms
+// • Máximo: 16.3187ms
+// ===================
+
+// Vantagens: Pré-alocação explícita, zero realocações, controle fino. Desvantagens: Estado mutável, maior variação de performance (branch misprediction?). Boa para quando precisa debugar ou entender cada passo.
+pub fn fizzbuzz_vec(n: u32) -> Vec<String> {
+    let mut v = Vec::with_capacity(n as usize);
+    for count in 1..=n {
+        let res = match (count % 3 == 0, count % 5 == 0) {
+            (true, true) => String::from("FizzBuzz"),
+            (true, false) => String::from("Fizz"),
+            (false, true) => String::from("Buzz"),
+            _ => count.to_string(),
+        };
+        v.push(res);
+    }
+    v
+}
+
+// 3º Lugar: Vec::new() sem pré-alocação
+// === PERFORMANCE (100 iterações) ===
+// FizzBuzz (vetor):
+// • Média: 31.751142ms
+// • Mínimo: 30.2632ms
+// • Máximo: 37.4417ms
+// ===================
+
+// === PERFORMANCE (100 iterações) === RELEASE MODE
+// FizzBuzz (vetor):
+// • Média: 16.247652ms
+// • Mínimo: 13.7166ms
+// • Máximo: 21.2504ms
+// ===================
+
+// Vantagens: Surpreendentemente rápido (alocador eficiente). Desvantagens: Múltiplas realocações e cópias desperdiçam ciclos. Código imperativo verboso. Evite em produção mesmo que seja rápido neste caso específico.
+pub fn fizzbuzz_vec(n: u32) -> Vec<String> {
+    let mut v = vec![];
+    let mut count = 1;
+
+    while count <= n {
+        if count % 15 == 0 {
+            v.push("FizzBuzz".to_string());
+        } else if count % 3 == 0 {
+            v.push("Fizz".to_string());
+        } else if count % 5 == 0 {
+            v.push("Buzz".to_string());
+        } else {
+            v.push(count.to_string());
+        }
+        count += 1;
+    }
+    v
+}
+
+// 4º Lugar: Loop Manual Desenrolado (Corrigido)
+// === PERFORMANCE (100 iterações) ===
+// FizzBuzz (vetor):
+// • Média: 29.3609ms
+// • Mínimo: 26.5256ms
+// • Máximo: 34.0177ms
+// ===================
+
+// === PERFORMANCE (100 iterações) === RELEASE MODE
+// FizzBuzz (vetor):
+// • Média: 13.281397ms
+// • Mínimo: 11.9514ms
+// • Máximo: 15.8463ms
+// ===================
+
+// Exemplo de otimização prematura: código ilegível, difícil de manter, propenso a erros, não generalizável. O ganho de performance não justifica a complexidade. Evite. Desejável apenas em contextos muito específicos como processamento de pixels, DSP, simulações físicas.
 pub fn fizzbuzz_vec(n: u32) -> Vec<String> {
     let mut v = Vec::with_capacity(n as usize);
     let mut count = 1;
+
+    // Loop desenrolado para blocos de 15
     while count + 14 <= n {
         v.push(count.to_string());
         v.push((count + 1).to_string());
@@ -78,20 +220,9 @@ pub fn fizzbuzz_vec(n: u32) -> Vec<String> {
         v.push(String::from("FizzBuzz"));
         count += 15
     }
-    v
-}
 
-// 1º Lugar: Iteradores com Pré-alocação Explicita (Mestre da Performance)
-// === PERFORMANCE (100 iterações) ===
-// FizzBuzz (vetor):
-// • Média: 33.446561ms
-// • Mínimo: 30.8137ms
-// • Máximo: 58.0763ms
-// ===================
-// Por que é a melhor? Usar .with_capacity(n as usize) aloca a memória exata na heap de uma única vez. Zero realocações. Além disso, usar strings estáticas String::from("...") evita processamento em tempo de execução, e o iterador mapeia os dados diretamente para o vetor final. É o uso ideal do sistema de tipos de Rust.
-pub fn fizzbuzz_vec(n: u32) -> Vec<String> {
-    let mut v = Vec::with_capacity(n as usize);
-    for count in 1..=n {
+    // Processa elementos restantes (remainder)
+    while count <= n {
         let res = match (count % 3 == 0, count % 5 == 0) {
             (true, true) => String::from("FizzBuzz"),
             (true, false) => String::from("Fizz"),
@@ -99,52 +230,8 @@ pub fn fizzbuzz_vec(n: u32) -> Vec<String> {
             _ => count.to_string(),
         };
         v.push(res);
-    }
-    v
-}
-
-// 2º Lugar: Funcional Pura (Abstração Zero-Cost)
-// === PERFORMANCE (100 iterações) ===
-// FizzBuzz (vetor):
-// • Média: 33.014854ms
-// • Mínimo: 30.895ms
-// • Máximo: 40.5282ms
-// ===================
-// Por que está aqui? Transforma o problema em uma pipeline de dados elegante. O método .collect() é inteligente o suficiente graças ao trait TrustedLen dos iteradores de intervalo (1..=n), o que significa que ele sabe o tamanho exato final e pré-aloca a memória por debaixo dos panos. Perde o primeiro lugar apenas porque a leitura do match em linha pode ficar densa para quem não domina o idioma.
-pub fn fizzbuzz_vec(n: u32) -> Vec<String> {
-    (1..=n)
-        .map(|count| match (count % 3 == 0, count % 5 == 0) {
-            (true, true) => String::from("FizzBuzz"),
-            (true, false) => String::from("Fizz"),
-            (false, true) => String::from("Buzz"),
-            _ => count.to_string(),
-        })
-        .collect()
-}
-
-// 3º Lugar: O Vetor Dinâmico Preguiçoso (Ineficiência de Alocação)
-// === PERFORMANCE (100 iterações) ===
-// FizzBuzz (vetor):
-// • Média: 31.751142ms
-// • Mínimo: 30.2632ms
-// • Máximo: 37.4417ms
-// ===================
-// Por que está no fim da fila? O uso de vec![] inicializa o vetor com capacidade zero. À medida que você dá .push(), o vetor atinge o limite, dobra de tamanho, pede mais memória ao sistema operacional, copia os elementos antigos para o novo endereço e deleta o antigo. Multiplique esse processo de cópia por milhares de iterações e você terá um gargalo massivo de I/O de memória. (Nota técnica: o código original continha o bug literário "{count}".to_string(), que foi corrigido aqui para count.to_string()).
-pub fn fizzbuzz_vec(n: u32) -> Vec<String> {
-    let mut v = vec![]; // Capacidade inicial: 0. Péssimo.
-    let mut count = 1;
-
-    while count <= n {
-        if count % 15 == 0 {
-            v.push("FizzBuzz".to_string());
-        } else if count % 3 == 0 {
-            v.push("Fizz".to_string());
-        } else if count % 5 == 0 {
-            v.push("Buzz".to_string());
-        } else {
-            v.push(count.to_string());
-        }
         count += 1;
     }
+
     v
 }

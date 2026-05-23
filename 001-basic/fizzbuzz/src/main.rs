@@ -17,47 +17,52 @@ fn main() {
 
 /// FizzBuzz from 1 to n
 pub fn fizzbuzz(n: u32) {
-    use std::io::{self, Write};
-
-    let stdout = io::stdout();
-    // BufWriter recebe a trava do stdout diretamente. Sem Box, sem overhead.
-    let mut handle = io::BufWriter::new(stdout.lock());
-
     for count in 1..=n {
         match (count % 3 == 0, count % 5 == 0) {
-            (true, true) => {
-                let _ = writeln!(handle, "FizzBuzz");
-            }
-            (true, false) => {
-                let _ = writeln!(handle, "Fizz");
-            }
-            (false, true) => {
-                let _ = writeln!(handle, "Buzz");
-            }
-            _ => {
-                let _ = writeln!(handle, "{count}");
-            }
+            (true, true) => println!("FizzBuzz"),
+            (true, false) => println!("Fizz"),
+            (false, true) => println!("Buzz"),
+            _ => println!("{count}"),
         }
     }
 }
-
 /// Alternative: return Vec<String> instead of printing
 pub fn fizzbuzz_vec(n: u32) -> Vec<String> {
-    let mut v = vec![]; // Capacidade inicial: 0. Péssimo.
+    let mut v = Vec::with_capacity(n as usize);
     let mut count = 1;
 
+    // Loop desenrolado para blocos de 15
+    while count + 14 <= n {
+        v.push(count.to_string());
+        v.push((count + 1).to_string());
+        v.push(String::from("Fizz"));
+        v.push((count + 3).to_string());
+        v.push(String::from("Buzz"));
+        v.push(String::from("Fizz"));
+        v.push((count + 6).to_string());
+        v.push((count + 7).to_string());
+        v.push(String::from("Fizz"));
+        v.push(String::from("Buzz"));
+        v.push((count + 10).to_string());
+        v.push(String::from("Fizz"));
+        v.push((count + 12).to_string());
+        v.push((count + 13).to_string());
+        v.push(String::from("FizzBuzz"));
+        count += 15
+    }
+
+    // Processa elementos restantes (remainder)
     while count <= n {
-        if count % 15 == 0 {
-            v.push("FizzBuzz".to_string());
-        } else if count % 3 == 0 {
-            v.push("Fizz".to_string());
-        } else if count % 5 == 0 {
-            v.push("Buzz".to_string());
-        } else {
-            v.push(count.to_string());
-        }
+        let res = match (count % 3 == 0, count % 5 == 0) {
+            (true, true) => String::from("FizzBuzz"),
+            (true, false) => String::from("Fizz"),
+            (false, true) => String::from("Buzz"),
+            _ => count.to_string(),
+        };
+        v.push(res);
         count += 1;
     }
+
     v
 }
 
@@ -65,6 +70,25 @@ pub fn fizzbuzz_vec(n: u32) -> Vec<String> {
 mod tests {
     use super::*;
     use std::time::Instant;
+
+    #[test]
+    fn benchmark_fizzbuzz_print() {
+        let n = 100_000;
+
+        let start = Instant::now();
+        fizzbuzz(n);
+        let duration = start.elapsed();
+
+        println!(
+            "\n\n=== PERFORMANCE FIZZBUZZ ===\n\
+            FizzBuzz (print) - n = {}:\n\
+            • Tempo: {:?}\n\
+            ===================\n",
+            n, duration
+        );
+
+        assert!(true);
+    }
 
     #[test]
     fn benchmark_fizzbuzz() {
