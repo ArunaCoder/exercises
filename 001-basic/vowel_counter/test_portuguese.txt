@@ -1,0 +1,9 @@
+let text = "Meditação é ausência do eu";
+println!("Contando caracteres em: {}", text);
+for c in text.chars() {
+    if c.is_ascii_alphabetic() {
+        println!("  '{}' → ASCII alfabético", c);
+    } else if c.is_alphabetic() {
+        println!("  '{}' → Unicode alfabético (IGNORADO pelo código atual!)", c);
+    }
+}
