@@ -185,6 +185,10 @@ name = "simple_inventory_system"
 version = "0.1.0"
 
 [[package]]
+name = "start"
+version = "0.1.0"
+
+[[package]]
 name = "string_reverser"
 version = "0.1.0"
 

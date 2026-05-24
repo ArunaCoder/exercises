@@ -1,63 +1,59 @@
-// First solution. Not optimized.
-
-use std::io;
 fn main() {
-    // Your code here: prompt user for temperature and conversion direction
-    println!("Temperature Converter");
-    println!("Choose 1 -  Fahrenheit to Celsius");
-    println!("Choose 2 - Celsius to Fahrenheit");
+    // Esta função não exige nenhuma edição
+    println!("Conversor de Temperatura");
+    println!("Escolha 1 - Fahrenheit para Celsius");
+    println!("Escolha 2 - Celsius para Fahrenheit");
 
     let mut input = String::new();
 
     io::stdin()
         .read_line(&mut input)
-        .expect("Failed to read line");
+        .expect("Falha ao ler a linha");
 
-    let input: u32 = input.trim().parse().expect("Please type a number!");
+    let input: u32 = input.trim().parse().expect("Por favor, digite um número!");
 
     if input == 1 {
-        println!("Enter the Fahrenheit degree to be converted");
+        println!("Digite os graus Fahrenheit a serem convertidos");
+
         let mut input = String::new();
+
         io::stdin()
             .read_line(&mut input)
-            .expect("Failed to read line");
+            .expect("Falha ao ler a linha");
 
-        let input: u32 = input.trim().parse().expect("Please type a number!");
+        let input: u32 = input.trim().parse().expect("Por favor, digite um número!");
 
         print!(
-            "{input} Fahrenheit equals to {} Celsius",
+            "{input} Fahrenheit equivale a {:.2} Celsius",
             fahrenheit_to_celsius(input as f64)
         )
     } else if input == 2 {
-        println!("Enter the Celcius degree to be converted");
+        println!("Digite os graus Celsius a serem convertidos");
+
         let mut input = String::new();
+
         io::stdin()
             .read_line(&mut input)
-            .expect("Failed to read line");
+            .expect("Falha ao ler a linha");
 
-        let input: u32 = input.trim().parse().expect("Please type a number!");
+        let input: u32 = input.trim().parse().expect("Por favor, digite um número!");
 
         print!(
-            "{input} Celsius equals to {} Fahrenheit",
+            "{input} Celsius equivale a {:.2} Fahrenheit",
             celsius_to_fahrenheit(input as f64)
         )
     } else {
-        println!("You typed {input}, which is different from 1 or 2. Let's start again.");
+        println!("Você digitou {input}, que é diferente de 1 ou 2. Vamos começar de novo.");
     }
 }
 
-// ============================================================
-// VERSÕES DE CONVERSÃO DE TEMPERATURA
-// ============================================================
-
 // 1º Lugar: Expressão Direta (Minimalista e Idiomática)
 // Quando usar: Código simples, conversões ocasionais. Vantagens: Concisa, clara, idiomática Rust. A expressão final é retornada implicitamente. Sem variáveis intermediárias desnecessárias. Perfeita para a maioria dos casos.
-/// Convert Fahrenheit to Celsius
+
 pub fn fahrenheit_to_celsius(f: f64) -> f64 {
     (f - 32.0) * 5.0 / 9.0
 }
 
-/// Convert Celsius to Fahrenheit
 pub fn celsius_to_fahrenheit(c: f64) -> f64 {
     c * 9.0 / 5.0 + 32.0
 }

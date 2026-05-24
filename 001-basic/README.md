@@ -2,6 +2,15 @@
 
 **Learning Focus**: Manual implementation, explicit logic, ownership fundamentals
 
+## 📚 Antes de Começar
+
+**Novo em Rust?** Consulte o guia de referência básica primeiro:
+- **[examples/rust_basics.rs](../examples/rust_basics.rs)** - Conceitos fundamentais explicados com exemplos práticos
+
+Execute com: `cargo run --example rust_basics`
+
+Este arquivo contém tudo que você precisa saber sobre variáveis, tipos, funções, formatação e muito mais. **Volte a ele sempre que tiver dúvidas sobre a sintaxe!**
+
 ## Philosophy
 
 This track teaches you to be the **owner** of your code, not a passenger. You will:

@@ -11,6 +11,7 @@ docs/
 EXERCISES_LIST.md
 **/solution.rs
 The Rust Edition Guide - Rust 2024.md
+001-basic/start/src/main.rs
 
 # Infra e Configs
 

@@ -1,55 +1,35 @@
 // FIZZBUZZ
-// This is the classic FizzBuzz problem.
-// Print numbers from 1 to N, but:
-// - For multiples of 3, print "Fizz"
-// - For multiples of 5, print "Buzz"
-// - For multiples of both 3 and 5, print "FizzBuzz"
-// - Otherwise, print the number
+// Este é o problema clássico FizzBuzz.
+// Imprima números de 1 a N, mas:
+// - Para múltiplos de 3, imprima "Fizz"
+// - Para múltiplos de 5, imprima "Buzz"
+// - Para múltiplos de ambos (3 e 5), imprima "FizzBuzz"
+// - Caso contrário, imprima o número
 
 fn main() {
-    println!("FizzBuzz from 1 to 100:");
-    fizzbuzz(20);
+    // Esta função não exige nenhuma edição
 
-    let result = fizzbuzz_vec(20);
+    println!("FizzBuzz de 1 a 100:");
+    fizzbuzz(100);
+
+    let result = fizzbuzz_vec(100);
 
     println!("{result:?}")
 }
 
-/// FizzBuzz from 1 to n
+/// FizzBuzz de 1 to n
 pub fn fizzbuzz(n: u32) {
-    use std::io::{self, Write};
-
-    let stdout = io::stdout();
-    let mut handle = io::BufWriter::new(stdout.lock());
-
-    for count in 1..=n {
-        match (count % 3 == 0, count % 5 == 0) {
-            (true, true) => {
-                let _ = writeln!(handle, "FizzBuzz");
-            }
-            (true, false) => {
-                let _ = writeln!(handle, "Fizz");
-            }
-            (false, true) => {
-                let _ = writeln!(handle, "Buzz");
-            }
-            _ => {
-                let _ = writeln!(handle, "{count}");
-            }
-        }
-    }
+    todo!(
+        "Use match com uma tupla (count % 3 == 0, count % 5 == 0) para cobrir todos os casos de forma declarativa."
+    );
 }
-/// Alternative: return Vec<String> instead of printing
+/// Alternativa: retorna Vec<String> em vez de print
 pub fn fizzbuzz_vec(n: u32) -> Vec<String> {
-    (1..=n)
-        .map(|count| match (count % 3 == 0, count % 5 == 0) {
-            (true, true) => String::from("FizzBuzz"),
-            (true, false) => String::from("Fizz"),
-            (false, true) => String::from("Buzz"),
-            _ => count.to_string(),
-        })
-        .collect()
+    todo!(
+        "Transforme o range (1..=n) em um iterador, aplique a lógica via .map() e materialize o resultado com .collect()."
+    )
 }
+
 #[cfg(test)]
 mod tests {
     use super::*;

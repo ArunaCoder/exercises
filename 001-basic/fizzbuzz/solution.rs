@@ -2,40 +2,9 @@
 // Nota: Para esta função, não focamos em performance. O println! domina o tempo de execução,
 // tornando as diferenças algorítmicas negligíveis. A análise de performance está em fizzbuzz_vec.
 
-// MENÇÃO ESPECIAL: BufWriter para I/O Pesado (Otimização Real)
-// === PERFORMANCE FIZZBUZZ ===
-// FizzBuzz (print) - n = 100000:
-// • Tempo: 265.5341ms <--- milissegundos
-// ===================
-
-// Quando usar: Volume massivo de impressões (milhares/milhões de linhas). Reduz syscalls agrupando writes em buffer. O .lock() evita travar/destravar stdout repetidamente. Esta é uma otimização de sistema apropriada, diferente das micro-otimizações algorítmicas. Em FizzBuzz com n pequeno, a diferença é imperceptível. Com n=1_000_000+, pode ser 10-50x mais rápido que println!.
-pub fn fizzbuzz(n: u32) {
-    use std::io::{self, Write};
-
-    let stdout = io::stdout();
-    let mut handle = io::BufWriter::new(stdout.lock());
-
-    for count in 1..=n {
-        match (count % 3 == 0, count % 5 == 0) {
-            (true, true) => {
-                let _ = writeln!(handle, "FizzBuzz");
-            }
-            (true, false) => {
-                let _ = writeln!(handle, "Fizz");
-            }
-            (false, true) => {
-                let _ = writeln!(handle, "Buzz");
-            }
-            _ => {
-                let _ = writeln!(handle, "{count}");
-            }
-        }
-    }
-}
-
 // 1º Lugar: Casamento de Padrões (Idiomático Rust)
 // === PERFORMANCE FIZZBUZZ ===
-// FizzBuzz (print) - n = 100000:
+// FizzBuzz (print) - n = 100_000:
 // • Tempo: 5.5292047s <--- segundos
 // ===================
 
@@ -82,6 +51,37 @@ pub fn fizzbuzz(n: u32) {
             println!("{count}");
         } else {
             println!("{out}");
+        }
+    }
+}
+
+// MENÇÃO ESPECIAL: BufWriter para I/O Pesado (Otimização Real)
+// === PERFORMANCE FIZZBUZZ ===
+// FizzBuzz (print) - n = 100_000:
+// • Tempo: 265.5341ms <--- milissegundos
+// ===================
+
+// Quando usar: Volume massivo de impressões (milhares/milhões de linhas). Reduz syscalls agrupando writes em buffer. O .lock() evita travar/destravar stdout repetidamente. Esta é uma otimização de sistema apropriada, diferente das micro-otimizações algorítmicas. Em FizzBuzz com n pequeno, a diferença é imperceptível. Com n=1_000_000+, pode ser 10-50x mais rápido que println!.
+pub fn fizzbuzz(n: u32) {
+    use std::io::{self, Write};
+
+    let stdout = io::stdout();
+    let mut handle = io::BufWriter::new(stdout.lock());
+
+    for count in 1..=n {
+        match (count % 3 == 0, count % 5 == 0) {
+            (true, true) => {
+                let _ = writeln!(handle, "FizzBuzz");
+            }
+            (true, false) => {
+                let _ = writeln!(handle, "Fizz");
+            }
+            (false, true) => {
+                let _ = writeln!(handle, "Buzz");
+            }
+            _ => {
+                let _ = writeln!(handle, "{count}");
+            }
         }
     }
 }
