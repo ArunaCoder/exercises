@@ -1,7 +1,10 @@
 // RUST BASICS - Guia de Referência Rápida
 // Este arquivo contém os fundamentos básicos de Rust que você precisará
 // para completar os exercícios. Volte aqui sempre que precisar relembrar a sintaxe!
-//
+
+// Os conceitos de Ownership e Borrowing serão abordados logo depois dos
+// primeiros exercícios para fixar a sintaxe
+
 // Para executar: cargo run --example rust_basics
 
 fn tipos() {
@@ -55,13 +58,21 @@ fn tipos() {
     // É um "fat pointer" (contém o endereço de memória e o comprimento).
     let _slice: &[i32] = &matriz[1..3];
 
+    // ==========================================================================
+    // TIPOS DE TEXTO (Strings)
+    // ==========================================================================
+
+    // String Slice (&str): Uma referência imutável a uma sequência de dados UTF-8.
+    // É um tipo especial de Slice. Geralmente usado para strings "hardcoded" (literais).
+    let _texto_estatico: &str = "Olá, Rust!";
+
+    // String (Alocada na Heap): Diferente da &str, esta pode crescer e ser modificada.
+    // Não é um tipo escalar, mas sim uma struct da biblioteca padrão.
+    let _texto_dinamico: String = String::from("Texto mutável");
+
     // Unit Type (): Representa a ausência de valor ou de retorno.
     // Equivalente ao 'void' em linguagens como C ou Java, mas é um tipo real de tamanho zero (ZST).
     fn _retorna_nada() -> () {}
-
-    // Never Type (!): Indica que uma função nunca retorna (ex: panic! ou loops infinitos).
-    // Estabilizado e refinado na Edition 2024 para melhor interoperabilidade.
-    // fn loop_infinito() -> ! { loop {} }
 }
 
 // ==================== EXEMPLOS DE FUNÇÕES ====================

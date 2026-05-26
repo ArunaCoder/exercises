@@ -2,7 +2,7 @@
 
 // Objetivo: Praticar a declaração de funções com retorno, operações aritméticas com tipos de ponto flutuante (f64) e vinculação de variáveis (let).
 
-// Diretivas para o Editor de código não 'reclamar' do códio incompleto
+// Instruções para o compilador e formatador ignorarem avisos de código incompleto ou estilo.
 #![cfg_attr(rustfmt, rustfmt_skip)]
 #![allow(warnings)]
 

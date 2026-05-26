@@ -45,7 +45,15 @@ name = "duplicate_remover"
 version = "0.1.0"
 
 [[package]]
+name = "exit_loop"
+version = "0.1.0"
+
+[[package]]
 name = "fibonacci_generator"
+version = "0.1.0"
+
+[[package]]
+name = "first_temperature_converter"
 version = "0.1.0"
 
 [[package]]
