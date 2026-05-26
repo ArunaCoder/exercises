@@ -2,7 +2,6 @@
 // Este programa converte temperaturas entre Fahrenheit e Celsius.
 // - Fahrenheit para Celsius: (F - 32) * 5/9
 // - Celsius para Fahrenheit: (C * 9/5) + 32
-// Implemente uma função para cada direção de conversão.
 
 use std::io;
 

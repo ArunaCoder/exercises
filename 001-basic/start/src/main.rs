@@ -4,32 +4,96 @@
 //
 // Para executar: cargo run --example rust_basics
 
+fn tipos() {
+    // ==========================================================================
+    // TIPOS ESCALARES (Representam um único valor)
+    // ==========================================================================
+
+    // Inteiros com sinal (Signed): i8, i16, i32, i64, i128, isize
+    // Armazenam valores negativos e positivos usando representação de complemento de dois.
+    // 'isize' depende da arquitetura do target (32 ou 64 bits), ideal para indexação.
+
+    // O prefixo "_" suprime avisos de variável não utilizada.
+    // Em produção, é usado legitimamente em alguns casos.
+    let _inteiro_sinal: i32 = -42;
+
+    // Inteiros sem sinal (Unsigned): u8, u16, u32, u64, u128, usize
+    // Úteis para contagens, tamanhos de memória e dados binários brutos.
+    // 'usize' é o tipo padrão para tamanhos de coleções e índices de arrays.
+    let _inteiro_sem_sinal: u32 = 100;
+
+    // Ponto Flutuante (Floats): f32 (precisão simples), f64 (precisão dupla)
+    // Seguem o padrão IEEE 754. f64 é o padrão moderno devido à precisão/performance.
+    let _ponto_flutuante: f64 = 3.14159265;
+
+    // Booleano (bool): true ou false
+    // Ocupa 1 byte na memória (8 bits), embora precise apenas de 1 bit para a informação.
+    let _ativo: bool = true;
+
+    // Caractere (char): Representa um Valor Escalar Unicode (4 bytes).
+    // Diferente de C/C++, um char em Rust não é apenas um byte ASCII.
+    let _letra: char = 'R';
+
+    // ==========================================================================
+    // TIPOS COMPOSTOS (Agrupam múltiplos valores em um tipo)
+    // ==========================================================================
+
+    // Tuplas (tuple): Agrupamento de tipos heterogêneos com tamanho fixo.
+    // Úteis para retornar múltiplos valores de uma função sem criar uma struct.
+    let tupla: (i32, f64, u8) = (500, 6.4, 1);
+    let (_x, _y, _z) = tupla; // Destructuring para acesso rápido
+
+    // Arrays: Coleção homogênea de tamanho fixo conhecido em tempo de compilação.
+    // Alocados na Stack (pilha). A assinatura inclui o tipo e o tamanho: [T; N].
+    let matriz: [i32; 3] = [1, 2, 3];
+
+    // ==========================================================================
+    // TIPOS ESPECIAIS E PONTEIROS
+    // ==========================================================================
+
+    // Slice (&[T]): Uma visão (view) para uma sequência de elementos num array ou vetor.
+    // É um "fat pointer" (contém o endereço de memória e o comprimento).
+    let _slice: &[i32] = &matriz[1..3];
+
+    // Unit Type (): Representa a ausência de valor ou de retorno.
+    // Equivalente ao 'void' em linguagens como C ou Java, mas é um tipo real de tamanho zero (ZST).
+    fn _retorna_nada() -> () {}
+
+    // Never Type (!): Indica que uma função nunca retorna (ex: panic! ou loops infinitos).
+    // Estabilizado e refinado na Edition 2024 para melhor interoperabilidade.
+    // fn loop_infinito() -> ! { loop {} }
+}
+
 // ==================== EXEMPLOS DE FUNÇÕES ====================
 // (Definidas aqui para você ver como se escreve funções)
 
-/// Função sem retorno (não retorna nada)
+// Função sem retorno (não retorna nada)
 fn saudar() {
     println!("Olá, mundo!");
 }
 
-/// Função com return explícito
-/// Retorna a soma de dois números
+// 'fn' é a palavra-chave reservada da linguagem Rust para declarar uma função.
+// 'somar_explicito' é o nome da função, definido livremente por quem escreve o código.
+// Os valores entre parênteses (a: u32, b: u32) são os parâmetros: dados que a função recebe para processar.
+// O operador '->' indica o tipo de dado que a função obrigatoriamente devolverá.
 fn somar_explicito(a: u32, b: u32) -> u32 {
-    return a + b; // return explícito com ponto-e-vírgula
+    return a + b; // O 'return' encerra a função e envia o resultado de volta para quem a chamou.
 }
 
-/// Função com return implícito (idiomático em Rust)
-/// Retorna a soma de dois números
+// Em Rust, esta é a forma idiomática (padrão preferido pela comunidade).
+// Note a ausência da palavra-chave 'return' e do ponto-e-vírgula no final.
 fn somar_implicito(a: u32, b: u32) -> u32 {
-    a + b // ⚠️ SEM ponto-e-vírgula! Expressão retorna automaticamente
+    // Por não ter ponto-e-vírgula, esta linha é uma "expressão de cauda" (tail expression).
+    // O Rust entende que o resultado desta expressão deve ser o valor de retorno da função.
+    a + b
 }
 
-/// Função que chama outra função
+// Função que chama outra função
 fn calcular_dobro(n: u32) -> u32 {
     somar_implicito(n, n)
 }
 
-/// Função com múltiplos parâmetros e tipos diferentes
+// Função com múltiplos parâmetros e tipos diferentes
 fn exibir_info(nome: &str, idade: u32, altura: f64) {
     println!("Nome: {}, Idade: {}, Altura: {:.2}m", nome, idade, altura);
 }
@@ -37,6 +101,7 @@ fn exibir_info(nome: &str, idade: u32, altura: f64) {
 // ==================== FUNÇÃO PRINCIPAL ====================
 
 fn main() {
+    tipos();
     println!("=== RUST BASICS - Guia de Referência ===\n");
 
     // ==================== VARIÁVEIS ====================

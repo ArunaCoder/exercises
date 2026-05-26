@@ -5,6 +5,7 @@
 ## 📚 Antes de Começar
 
 **Novo em Rust?** Consulte o guia de referência básica primeiro:
+
 - **[examples/rust_basics.rs](../examples/rust_basics.rs)** - Conceitos fundamentais explicados com exemplos práticos
 
 Execute com: `cargo run --example rust_basics`
@@ -49,28 +50,69 @@ This track teaches you to be the **owner** of your code, not a passenger. You wi
 
 Run with: `cargo run -p <folder_name>`
 
-| #   | Exercise              | Folder                                                | Key Concepts                       |
-| --- | --------------------- | ----------------------------------------------------- | ---------------------------------- |
-| 1   | Temperature Converter | [temperature_converter](temperature_converter/)       | Functions, f64, formulas           |
-| 2   | FizzBuzz              | [fizzbuzz](fizzbuzz/)                                 | Loops, modulo, conditionals        |
-| 3   | Leap Year Checker     | [leap_year_checker](leap_year_checker/)               | Boolean logic, nested conditionals |
-| 4   | Vowel Counter         | [vowel_counter](vowel_counter/)                       | Char iteration, counting           |
-| 5   | Palindrome Checker    | [palindrome_checker](palindrome_checker/)             | String reversal with for loop      |
-| 6   | String Reverser       | [string_reverser](string_reverser/)                   | UTF-8 handling, manual collection  |
-| 7   | Fibonacci Generator   | [fibonacci_generator](fibonacci_generator/)           | Loop with mutable variables        |
-| 8   | Prime Number Checker  | [prime_number_checker](prime_number_checker/)         | Nested loops, divisibility         |
-| 9   | Armstrong Number      | [armstrong_number_checker](armstrong_number_checker/) | Digit extraction, exponentiation   |
-| 10  | Sum of Multiples      | [sum_of_multiples](sum_of_multiples/)                 | Loop + accumulation                |
-| 11  | Collatz Conjecture    | [collatz_conjecture](collatz_conjecture/)             | Loop with conditional logic        |
-| 12  | Acronym Generator     | [acronym_generator](acronym_generator/)               | Split + for loop                   |
-| 13  | Simple Calculator     | [simple_calculator](simple_calculator/)               | Enum, pattern matching             |
-| 14  | Guessing Game         | [guessing_game_enhanced](guessing_game_enhanced/)     | User input loop, random            |
-| 15  | Shopping List Manager | [shopping_list_manager](shopping_list_manager/)       | Vec operations, menu               |
-| 16  | Word Counter (Basic)  | [word_counter_basic](word_counter_basic/)             | String splits, counting            |
-| 17  | Caesar Cipher         | [caesar_cipher](caesar_cipher/)                       | Char manipulation, ASCII           |
-| 18  | Binary to Decimal     | [binary_to_decimal](binary_to_decimal/)               | Manual base conversion             |
-| 19  | ISBN Validator        | [isbn_validator](isbn_validator/)                     | Validation pattern                 |
-| 20  | Rock Paper Scissors   | [rock_paper_scissors](rock_paper_scissors/)           | Enum, random, game logic           |
+- **1. First Temperature Converter**
+  - Pasta: [first_temperature_converter](first_temperature_converter/)
+  - Conceitos: Functions, f64, formulas, let
+- **2. Temperature Converter**
+  - Pasta: [temperature_converter](temperature_converter/)
+  - Conceitos: Functions, f64, formulas
+- **3. FizzBuzz**
+  - Pasta: [fizzbuzz](fizzbuzz/)
+  - Conceitos: Loops, modulo, conditionals
+- **4. Leap Year Checker**
+  - Pasta: [leap_year_checker](leap_year_checker/)
+  - Conceitos: Boolean logic, nested conditionals
+- **5. Vowel Counter**
+  - Pasta: [vowel_counter](vowel_counter/)
+  - Conceitos: Char iteration, counting
+- **6. Palindrome Checker**
+  - Pasta: [palindrome_checker](palindrome_checker/)
+  - Conceitos: String reversal with for loop
+- **7. String Reverser**
+  - Pasta: [string_reverser](string_reverser/)
+  - Conceitos: UTF-8 handling, manual collection
+- **8. Fibonacci Generator**
+  - Pasta: [fibonacci_generator](fibonacci_generator/)
+  - Conceitos: Loop with mutable variables
+- **9. Prime Number Checker**
+  - Pasta: [prime_number_checker](prime_number_checker/)
+  - Conceitos: Nested loops, divisibility
+- **10. Armstrong Number**
+  - Pasta: [armstrong_number_checker](armstrong_number_checker/)
+  - Conceitos: Digit extraction, exponentiation
+- **11. Sum of Multiples**
+  - Pasta: [sum_of_multiples](sum_of_multiples/)
+  - Conceitos: Loop + accumulation
+- **12. Collatz Conjecture**
+  - Pasta: [collatz_conjecture](collatz_conjecture/)
+  - Conceitos: Loop with conditional logic
+- **13. Acronym Generator**
+  - Pasta: [acronym_generator](acronym_generator/)
+  - Conceitos: Split + for loop
+- **14. Simple Calculator**
+  - Pasta: [simple_calculator](simple_calculator/)
+  - Conceitos: Enum, pattern matching
+- **15. Guessing Game**
+  - Pasta: [guessing_game_enhanced](guessing_game_enhanced/)
+  - Conceitos: User input loop, random
+- **16. Shopping List Manager**
+  - Pasta: [shopping_list_manager](shopping_list_manager/)
+  - Conceitos: Vec operations, menu
+- **17. Word Counter (Basic)**
+  - Pasta: [word_counter_basic](word_counter_basic/)
+  - Conceitos: String splits, counting
+- **18. Caesar Cipher**
+  - Pasta: [caesar_cipher](caesar_cipher/)
+  - Conceitos: Char manipulation, ASCII
+- **19. Binary to Decimal**
+  - Pasta: [binary_to_decimal](binary_to_decimal/)
+  - Conceitos: Manual base conversion
+- **20. ISBN Validator**
+  - Pasta: [isbn_validator](isbn_validator/)
+  - Conceitos: Validation pattern
+- **21. Rock Paper Scissors**
+  - Pasta: [rock_paper_scissors](rock_paper_scissors/)
+  - Conceitos: Enum, random, game logic
 
 ### Coming Soon
 
