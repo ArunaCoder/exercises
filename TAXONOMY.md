@@ -1,5 +1,8 @@
 # Exercise Taxonomy - Track Classification
 
+📌📌📌📌 `TODO: Ir atualiando conforme a organização dos exercícios for evoluindo` 📌📌📌📌
+📌📌📌📌 `TODO: Traduzir` 📌📌📌📌
+
 This document classifies all 100 exercises into learning tracks based on pedagogical progression.
 
 ## Track Philosophy

@@ -1,5 +1,7 @@
 # Trilha 001: Fundamentos Básicos
 
+📌📌📌📌 `TODO: Ir atualiando conforme a organização dos exercícios for evoluindo` 📌📌📌📌
+
 **Foco de Aprendizado**: Implementação manual, lógica explícita, fundamentos de ownership
 
 ## 📚 Antes de Começar
